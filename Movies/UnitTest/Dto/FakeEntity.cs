@@ -1,4 +1,5 @@
-﻿using Entity.Domain.Models.Base;
+using Entity.Domain.Models.Base;
+using Entity.DTOs.Base;
 
 namespace UnitTest.Dto
 {
@@ -11,7 +12,8 @@ namespace UnitTest.Dto
     {
         public string? Name { get; set; }
     }
-    public class FakeUpdate
+
+    public class FakeUpdateDto : BaseDto
     {
         public string? Name { get; set; }
     }
