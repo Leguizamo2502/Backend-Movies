@@ -35,7 +35,7 @@ namespace Web.Controllers.Implements
 
         protected override async Task<IEnumerable<ReviewSelectDto>> GetAllAsync(GetAllType getAllType)
         {
-            var entity = await _service.GetAllAsync(getAllType);
+            var entity = await _service.GetAllAsync();
             if (entity is null) return null;
 
 
