@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Entity.DTOs.Talent.Actor.Create
+﻿namespace Entity.DTOs.Talent.Actor.Create
 {
-    internal class ActorCreateDto
+    public class ActorCreateDto 
     {
+        public string Name { get; set; } 
+        public int? BirthYear { get; set; }
     }
 }

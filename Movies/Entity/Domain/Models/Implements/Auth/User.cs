@@ -12,7 +12,7 @@ namespace Entity.Domain.Models.Implements.Auth
         public string Name { get; set; }
 
         public ICollection<Review> Reviews { get; set; } = [];
-        public ICollection<Watchlist> Watchlists { get; set; }
+        public ICollection<Watchlist> Watchlists { get; set; } = [];
 
     }
 }

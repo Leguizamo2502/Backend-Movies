@@ -21,6 +21,14 @@ namespace Data.Services.Catalog
                 .ToListAsync();
         }
 
+        public override async Task<MovieGenre?> GetByIdAsync(int id)
+        {
+            return await _dbSet
+                .Include(mg => mg.Movie)
+                .Include(mg => mg.Genre)
+                .FirstOrDefaultAsync(mg => mg.Id == id && mg.IsDeleted == false);
+        }
+
     }
     
 }

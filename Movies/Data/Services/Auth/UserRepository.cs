@@ -13,6 +13,13 @@ namespace Data.Services.Auth
         {
         }
 
+        public override async Task<User> CreateAsync(User entity)
+        {
+            _dbSet.Add(entity);
+            await _context.SaveChangesAsync();
+            return entity;
+        }
+
         public async Task<bool> ExistsByEmailAsync(string email)
         {
             return await _dbSet.AnyAsync(u=>u.Email == email);

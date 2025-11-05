@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Entity.DTOs.Base;
 
 namespace Entity.DTOs.Talent.Actor.Update
 {
-    internal class ActorUpdateDto
+    public class ActorUpdateDto : BaseDto
     {
+        public string Name { get; set; } = null!;
+        public int? BirthYear { get; set; }
     }
 }
