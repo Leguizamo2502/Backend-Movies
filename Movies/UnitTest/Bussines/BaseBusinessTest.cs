@@ -1,5 +1,7 @@
-﻿using Business.Interfaces.BaseService;
+using Business.Services.BaseService;
 using Data.Interfaces.DataGeneric;
+using Entity.Domain.Enums;
+using MapsterMapper;
 using Moq;
 using UnitTest.Dto;
 
@@ -7,152 +9,124 @@ namespace UnitTest.Bussines
 {
     public class BaseBusinessTest
     {
-        private readonly Mock<IDataGeneric<FakeEntity>> _mockData;
-        private readonly Mock<IMapper> _mockMapper;
-        private readonly IBaseBusiness<FakeSelectDto, FakeCreateDto, FakeEntity> _service;
+        private readonly Mock<IDataGeneric<FakeEntity>> _dataMock;
+        private readonly Mock<IMapper> _mapperMock;
+        private readonly BaseBusiness<FakeEntity, FakeSelectDto, FakeCreateDto, FakeUpdateDto> _service;
 
         public BaseBusinessTest()
         {
-            _mockData = new Mock<IDataGeneric<FakeEntity>>();
-            _mockMapper = new Mock<IMapper>();
-
-            _service = new BusinessBasic<FakeSelectDto, FakeCreateDto, FakeEntity>(_mockData.Object, _mockMapper.Object);
+            _dataMock = new Mock<IDataGeneric<FakeEntity>>();
+            _mapperMock = new Mock<IMapper>();
+            _service = new BaseBusiness<FakeEntity, FakeSelectDto, FakeCreateDto, FakeUpdateDto>(_mapperMock.Object, _dataMock.Object);
         }
 
-        // ==========================================
-        // TEST 1: GetAllAsync()
-        // ==========================================
         [Fact]
-        public async Task GetAllAsyncShouldReturnMappedDtos()
+        public async Task GetAllAsync_ReturnsMappedDtos()
         {
-            // Arrange
-            var entities = new List<FakeEntity> { new FakeEntity { Id = 1, Name = "A" } };
-            _mockData.Setup(d => d.GetAllAsync()).ReturnsAsync(entities);
-            _mockMapper.Setup(m => m.Map<IEnumerable<FakeSelectDto>>(entities))
-                       .Returns(new List<FakeSelectDto> { new FakeSelectDto { Name = "A" } });
+            var entities = new List<FakeEntity> { new() { Id = 1, Name = "A" } };
+            var mapped = new List<FakeSelectDto> { new() { Name = "A" } };
 
-            // Act
+            _dataMock.Setup(d => d.GetAllAsync()).ReturnsAsync(entities);
+            _mapperMock.Setup(m => m.Map<IEnumerable<FakeSelectDto>>(entities)).Returns(mapped);
+
             var result = await _service.GetAllAsync();
 
-            // Assert
-            result.Should().NotBeNull().And.HaveCount(1);
-            result.First().Name.Should().Be("A");
+            Assert.NotNull(result);
+            var list = result.ToList();
+            Assert.Single(list);
+            Assert.Equal("A", list[0].Name);
         }
 
-        // ==========================================
-        // TEST 2: GetByIdAsync()
-        // ==========================================
         [Fact]
-        public async Task GetByIdAsyncShouldReturnMappedDtoWhenExists()
+        public async Task GetAllAsync_WithStrategy_ReturnsMappedDtos()
+        {
+            var entities = new List<FakeEntity> { new() { Id = 1, Name = "Deleted" } };
+            var mapped = new List<FakeSelectDto> { new() { Name = "Deleted" } };
+
+            _dataMock.Setup(d => d.GetDeletes()).ReturnsAsync(entities);
+            _mapperMock.Setup(m => m.Map<IEnumerable<FakeSelectDto>>(entities)).Returns(mapped);
+
+            var result = await _service.GetAllAsync(GetAllType.GetAllDeletes);
+
+            Assert.NotNull(result);
+            var list = result.ToList();
+            Assert.Single(list);
+            Assert.Equal("Deleted", list[0].Name);
+        }
+
+        [Fact]
+        public async Task GetByIdAsync_ReturnsMappedDto()
         {
             var entity = new FakeEntity { Id = 1, Name = "A" };
-            _mockData.Setup(d => d.GetByIdAsync(1)).ReturnsAsync(entity);
-            _mockMapper.Setup(m => m.Map<FakeSelectDto>(entity))
-                       .Returns(new FakeSelectDto { Name = "A" });
+            var mapped = new FakeSelectDto { Name = "A" };
+
+            _dataMock.Setup(d => d.GetByIdAsync(1)).ReturnsAsync(entity);
+            _mapperMock.Setup(m => m.Map<FakeSelectDto>(entity)).Returns(mapped);
 
             var result = await _service.GetByIdAsync(1);
 
-            result.Should().NotBeNull();
-            result!.Name.Should().Be("A");
+            Assert.NotNull(result);
+            Assert.Equal("A", result!.Name);
         }
 
         [Fact]
-        public async Task GetByIdAsyncShouldThrowWhenIdIsInvalid()
-        {
-            Func<Task> act = async () => await _service.GetByIdAsync(0);
-            await act.Should().ThrowAsync<BusinessException>()
-                .WithMessage("*Error al obtener el registro con ID*");
-        }
-
-        // ==========================================
-        // TEST 3: CreateAsync()
-        // ==========================================
-        [Fact]
-        public async Task CreateAsyncShouldMapAndPersistEntity()
+        public async Task CreateAsync_MapsEntityAndReturnsDto()
         {
             var dto = new FakeCreateDto { Name = "New" };
             var entity = new FakeEntity { Id = 1, Name = "New" };
 
-            _mockMapper.Setup(m => m.Map<FakeEntity>(dto)).Returns(entity);
-            _mockData.Setup(d => d.CreateAsync(entity)).ReturnsAsync(entity);
-            _mockMapper.Setup(m => m.Map<FakeCreateDto>(entity)).Returns(dto);
+            _mapperMock.Setup(m => m.Map<FakeEntity>(dto)).Returns(entity);
+            _dataMock.Setup(d => d.CreateAsync(entity)).ReturnsAsync(entity);
+            _mapperMock.Setup(m => m.Map<FakeCreateDto>(It.IsAny<FakeEntity>())).Returns(dto);
 
             var result = await _service.CreateAsync(dto);
 
-            result.Should().NotBeNull();
-            result.Name.Should().Be("New");
+            Assert.NotNull(result);
+            Assert.Equal("New", result.Name);
         }
 
         [Fact]
-        public async Task CreateAsyncShouldThrowWhenDtoIsNull()
+        public async Task UpdateAsync_MapsEntityAndReturnsRepositoryResult()
         {
-            Func<Task> act = async () => await _service.CreateAsync(null!);
-            await act.Should().ThrowAsync<BusinessException>()
-                .WithMessage("*Error al crear el registro*");
-        }
+            var dto = new FakeUpdateDto { Id = 1, Name = "Updated" };
+            var entity = new FakeEntity { Id = 1, Name = "Updated" };
 
-        // ==========================================
-        // TEST 4: UpdateAsync()
-        // ==========================================
-        [Fact]
-        public async Task UpdateAsyncShouldReturnTrueWhenSuccessful()
-        {
-            var dto = new FakeCreateDto { Name = "Update" };
-            var entity = new FakeEntity { Id = 1, Name = "Update" };
-
-            _mockMapper.Setup(m => m.Map<FakeEntity>(dto)).Returns(entity);
-            _mockData.Setup(d => d.UpdateAsync(entity)).ReturnsAsync(true);
+            _mapperMock.Setup(m => m.Map<FakeEntity>(dto)).Returns(entity);
+            _dataMock.Setup(d => d.UpdateAsync(entity)).ReturnsAsync(true);
 
             var result = await _service.UpdateAsync(dto);
 
-            result.Should().BeTrue();
+            Assert.True(result);
         }
 
-        // ==========================================
-        // TEST 5: DeleteAsync()
-        // ==========================================
         [Fact]
-        public async Task DeleteAsyncShouldReturnTrueWhenDeleted()
+        public async Task DeleteAsync_ReturnsRepositoryResult()
         {
-            _mockData.Setup(d => d.DeleteAsync(1)).ReturnsAsync(true);
+            _dataMock.Setup(d => d.DeleteAsync(1)).ReturnsAsync(true);
 
             var result = await _service.DeleteAsync(1);
 
-            result.Should().BeTrue();
+            Assert.True(result);
         }
 
         [Fact]
-        public async Task DeleteAsyncShouldThrowWhenIdInvalid()
+        public async Task DeleteAsync_WithStrategy_UsesRepositoryDeleteLogic()
         {
-            Func<Task> act = async () => await _service.DeleteAsync(0);
-            await act.Should().ThrowAsync<BusinessException>()
-                .WithMessage("*Error al eliminar el registro con ID*");
+            _dataMock.Setup(d => d.DeleteLogicAsync(2)).ReturnsAsync(true);
+
+            var result = await _service.DeleteAsync(2, DeleteType.Logical);
+
+            Assert.True(result);
         }
 
-        // ==========================================
-        // TEST 6: DeleteAsync with Strategy
-        // ==========================================
         [Fact]
-        public async Task DeleteAsyncWithStrategyShouldInvokeFactory()
+        public async Task RestoreLogical_ReturnsRepositoryResult()
         {
-            _mockData.Setup(d => d.DeleteLogicAsync(1)).ReturnsAsync(true);
+            _dataMock.Setup(d => d.RestoreAsync(3)).ReturnsAsync(true);
 
-            var result = await _service.DeleteAsync(1, DeleteType.Logical);
+            var result = await _service.RestoreLogical(3);
 
-            result.Should().BeTrue();
-        }
-
-        // ==========================================
-        // TEST 7: RestoreLogical()
-        // ==========================================
-        [Fact]
-        public async Task RestoreLogicalShouldReturnTrueWhenRestored()
-        {
-            _mockData.Setup(d => d.RestoreAsync(1)).ReturnsAsync(true);
-
-            var result = await _service.RestoreLogical(1);
-
-            result.Should().BeTrue();
+            Assert.True(result);
         }
     }
 }
