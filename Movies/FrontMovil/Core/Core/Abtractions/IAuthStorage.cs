@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+namespace FrontMovil.Core.Core.Abtractions;
 
-namespace FrontMovil.Core.Core.Abtractions
+public interface IAuthStorage
 {
-    interface IAuthStorage
-    {
-    }
+    Task SaveTokensAsync(string? accessToken, string? refreshToken, string? csrfToken);
+    Task<string?> GetAccessTokenAsync();
+    Task<string?> GetRefreshTokenAsync();
+    Task<string?> GetCsrfTokenAsync();
+    Task ClearAsync();
 }
