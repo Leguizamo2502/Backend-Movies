@@ -5,6 +5,8 @@
         public AppShell()
         {
             InitializeComponent();
+
+            Routing.RegisterRoute("movies/form", typeof(Views.Movies.MovieFormPage));     // Create/Edit
         }
     }
 }
