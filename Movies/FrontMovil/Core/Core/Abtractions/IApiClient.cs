@@ -1,11 +1,12 @@
-using Entity.DTOs.Catalog.Movie.Select;
-using FrontMovil.Core.Models;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace FrontMovil.Core.Core.Abtractions;
-
-public interface IApiClient
+namespace FrontMovil.Core.Core.Abtractions
 {
-    Task<ApiResult<bool>> LoginAsync(string email, string password, CancellationToken cancellationToken = default);
-    Task<ApiResult<bool>> LogoutAsync(CancellationToken cancellationToken = default);
-    Task<ApiResult<IReadOnlyList<MovieSelectDto>>> GetMoviesAsync(CancellationToken cancellationToken = default);
+    interface IApiClient
+    {
+    }
 }
