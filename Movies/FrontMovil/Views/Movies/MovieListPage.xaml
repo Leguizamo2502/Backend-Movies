@@ -1,12 +1,43 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModels="clr-namespace:FrontMovil.ViewModels.Movies"
+             xmlns:movieDto="clr-namespace:Entity.DTOs.Catalog.Movie.Select;assembly=Entity"
              x:Class="FrontMovil.Views.Movies.MovieListPage"
-             Title="MovieListPage">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+             x:DataType="viewModels:MovieListViewModel"
+             Title="Películas">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Salir" Command="{Binding LogoutCommand}" />
+    </ContentPage.ToolbarItems>
+
+    <RefreshView Command="{Binding RefreshCommand}" IsRefreshing="{Binding IsBusy}">
+        <Grid RowDefinitions="Auto,*">
+            <Label Grid.Row="0"
+                   Text="{Binding StatusMessage}"
+                   Padding="16,8"
+                   IsVisible="{Binding StatusMessage, Converter={StaticResource NullToBoolConverter}}" />
+            <CollectionView Grid.Row="1" ItemsSource="{Binding Movies}" SelectionMode="None">
+                <CollectionView.EmptyView>
+                    <StackLayout Padding="24" Spacing="12">
+                        <Label Text="No hay películas para mostrar." />
+                        <Label Text="{Binding StatusMessage}" />
+                    </StackLayout>
+                </CollectionView.EmptyView>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="movieDto:MovieSelectDto">
+                        <Frame Margin="12" Padding="16">
+                            <VerticalStackLayout Spacing="8">
+                                <Label Text="{Binding Title}" FontAttributes="Bold" FontSize="18" />
+                                <Label Text="{Binding Description}" LineBreakMode="WordWrap" />
+                                <HorizontalStackLayout Spacing="12">
+                                    <Label Text="{Binding ReleaseYear, StringFormat='Año: {0}'}" />
+                                    <Label Text="{Binding DurationMinutes, StringFormat='Duración: {0} min'}" />
+                                </HorizontalStackLayout>
+                            </VerticalStackLayout>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </Grid>
+    </RefreshView>
 </ContentPage>
