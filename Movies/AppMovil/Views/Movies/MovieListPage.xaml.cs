@@ -1,4 +1,4 @@
-using AppMovil.ViewModels.Movies;
+using AppMovil.ViewModels.Implements.Movies;
 
 namespace AppMovil.Views.Movies;
 
@@ -15,7 +15,8 @@ public partial class MovieListPage : ContentPage
     protected override async void OnAppearing()
     {
         base.OnAppearing();
+        // Si prefieres refrescar siempre, elimina el if
         if (_vm.Items.Count == 0)
-            await _vm.LoadAsyncCommand.ExecuteAsync(null);
+            await _vm.LoadCommand.ExecuteAsync(null);
     }
 }

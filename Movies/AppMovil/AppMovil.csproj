@@ -69,7 +69,6 @@
 
 	<ItemGroup>
 	  <Folder Include="Services\Http\" />
-	  <Folder Include="ViewModels\Movies\" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -83,6 +82,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\Genre\GenreListPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Movies\MovieFormPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\Movies\MovieListPage.xaml">

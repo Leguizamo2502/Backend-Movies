@@ -1,8 +1,6 @@
-﻿using AppMovil.Models.Implements.Actor;
-using AppMovil.Services.Abstractions;
+﻿using AppMovil.Services.Abstractions;
 using AppMovil.Services.Abstractions.Generic;
 using AppMovil.Services.Abstractions.Implements;
-using AppMovil.Services.Http;
 using AppMovil.Services.Implementations;
 using AppMovil.Services.Implementations.Generic;
 using AppMovil.Services.Implementations.Implements;
@@ -10,9 +8,9 @@ using AppMovil.ViewModels.Implements.Actor;
 using AppMovil.ViewModels.Implements.Genre;
 using AppMovil.ViewModels.Implements.MovieActor;
 using AppMovil.ViewModels.Implements.MovieGenre;
+using AppMovil.ViewModels.Implements.Movies;
 using AppMovil.ViewModels.Implements.Review;
 using AppMovil.ViewModels.Implements.Watchlist;
-using AppMovil.ViewModels.Movies;
 using AppMovil.Views.Actor;
 using AppMovil.Views.Genre;
 using AppMovil.Views.MovieActor;
@@ -34,6 +32,7 @@ namespace AppMovil.Config
 
             // ----------------- ViewModels -------------------------------
             services.AddScoped<MovieListViewModel>();
+            services.AddScoped<MovieFormViewModel>();
 
             services.AddScoped<ActorListViewModel>();
             services.AddScoped<ActorFormViewModel>();
@@ -55,6 +54,7 @@ namespace AppMovil.Config
 
             // ----------------- Views / Pages ---------------------------
             services.AddTransient<MovieListPage>();
+            services.AddTransient<MovieFormPage>(); 
 
             services.AddTransient<ActorListPage>();
             services.AddTransient<ActorFormPage>();

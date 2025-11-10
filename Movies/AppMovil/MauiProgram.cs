@@ -1,9 +1,6 @@
-﻿using AppMovil.Config;
-using AppMovil.Services.Abstractions;
+﻿
+using AppMovil.Config;
 using AppMovil.Services.Http;
-using AppMovil.Services.Implementations;
-using AppMovil.ViewModels.Movies;
-using AppMovil.Views.Movies;
 using Microsoft.Extensions.Logging;
 
 namespace AppMovil

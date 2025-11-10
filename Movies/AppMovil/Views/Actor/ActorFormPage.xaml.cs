@@ -1,6 +1,4 @@
-using System.Collections.Generic;
 using AppMovil.ViewModels.Implements.Actor;
-using Microsoft.Maui.Controls;
 
 namespace AppMovil.Views.Actor;
 

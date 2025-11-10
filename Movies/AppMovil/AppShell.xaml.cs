@@ -2,6 +2,7 @@ using AppMovil.Views.Actor;
 using AppMovil.Views.Genre;
 using AppMovil.Views.MovieActor;
 using AppMovil.Views.MovieGenre;
+using AppMovil.Views.Movies;
 using AppMovil.Views.Review;
 using AppMovil.Views.Watchlist;
 
@@ -12,6 +13,8 @@ namespace AppMovil
         public AppShell()
         {
             InitializeComponent();
+
+            Routing.RegisterRoute("movie/form", typeof(MovieFormPage));
 
             Routing.RegisterRoute("actor/form", typeof(ActorFormPage));
 
