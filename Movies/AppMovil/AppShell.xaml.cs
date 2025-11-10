@@ -17,6 +17,11 @@ namespace AppMovil
 
             Routing.RegisterRoute("genre/form", typeof(GenreFormPage));
 
+            Routing.RegisterRoute("movieactor/form", typeof(MovieActorFormPage));
+            Routing.RegisterRoute("moviegenre/form", typeof(MovieGenreFormPage));
+            Routing.RegisterRoute("watchlist/form", typeof(WatchlistFormPage));
+            Routing.RegisterRoute("review/form", typeof(ReviewFormPage));
+
 
         }
     }

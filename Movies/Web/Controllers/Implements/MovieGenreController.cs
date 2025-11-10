@@ -10,7 +10,7 @@ using Web.Controllers.Base;
 namespace Web.Controllers.Implements
 {
     [Route("api/v1/[controller]")]
-    [Authorize]
+    //[Authorize]
     [ApiController]
     [Produces("application/json")]
     public class MovieGenreController : BaseController<MovieGenreSelectDto, MovieGenreCreateDto, MovieGenreUpdateDto, IMovieGenreService>

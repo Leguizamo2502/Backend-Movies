@@ -11,13 +11,34 @@
     xmlns:watchlist="clr-namespace:AppMovil.Views.Watchlist"
     xmlns:review="clr-namespace:AppMovil.Views.Review">
 
-    <FlyoutItem
-    Title="Usuarios"
-    Icon="genres.png"
-    Route="genres">
+    <TabBar>
         <ShellContent
             Title="Películas"
-            ContentTemplate="{DataTemplate views:GenreListPage}"
+            ContentTemplate="{DataTemplate movies:MovieListPage}"
             Route="movies" />
+        <ShellContent
+            Title="Actores"
+            ContentTemplate="{DataTemplate actors:ActorListPage}"
+            Route="actors" />
+        <ShellContent
+            Title="Géneros"
+            ContentTemplate="{DataTemplate genres:GenreListPage}"
+            Route="genres" />
+        <ShellContent
+            Title="Reparto"
+            ContentTemplate="{DataTemplate movieActor:MovieActorListPage}"
+            Route="movieactors" />
+        <ShellContent
+            Title="Películas por género"
+            ContentTemplate="{DataTemplate movieGenre:MovieGenreListPage}"
+            Route="moviegenres" />
+        <ShellContent
+            Title="Watchlists"
+            ContentTemplate="{DataTemplate watchlist:WatchlistListPage}"
+            Route="watchlists" />
+        <ShellContent
+            Title="Reseñas"
+            ContentTemplate="{DataTemplate review:ReviewListPage}"
+            Route="reviews" />
     </TabBar>
 </Shell>
