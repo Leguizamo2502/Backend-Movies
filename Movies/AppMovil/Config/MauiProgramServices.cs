@@ -1,4 +1,6 @@
-﻿using AppMovil.Services.Abstractions;
+using System;
+using Microsoft.Extensions.DependencyInjection;
+using AppMovil.Services.Abstractions;
 using AppMovil.Services.Abstractions.Generic;
 using AppMovil.Services.Abstractions.Implements;
 using AppMovil.Services.Implementations;
@@ -57,6 +59,7 @@ namespace AppMovil.Config
 
             // ----------------- Views / Pages ---------------------------
             services.AddTransient<LoginPage>();
+            services.AddSingleton<Func<LoginPage>>(sp => () => sp.GetRequiredService<LoginPage>());
             services.AddTransient<MovieListPage>();
             services.AddTransient<MovieFormPage>(); 
 
