@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AppMovil.Views.Genre.GenreListPage"
+             BackgroundColor="{StaticResource Bg}"
+             Title="GenreListPage"
+             x:Name="PageGenre">
+
+    <!-- Botón para crear -->
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Agregar"
+                 Priority="0"
+                 Order="Primary"
+                 Command="{Binding CreateCommand}" />
+    </ContentPage.ToolbarItems>
+
+    <Grid RowDefinitions="Auto,Auto,*" Padding="16">
+
+        <!-- Título -->
+        <Label Grid.Row="0"
+           Text="{Binding Title}"
+           FontAttributes="Bold"
+           FontSize="22"
+           TextColor="{StaticResource TextPrimary}" />
+
+        <!-- Indicador primera carga -->
+        <ActivityIndicator Grid.Row="1"
+                       IsVisible="{Binding IsBusy}"
+                       IsRunning="{Binding IsBusy}"
+                       Color="{StaticResource Primary}" />
+
+        <!-- Pull-to-refresh -->
+        <RefreshView Grid.Row="2"
+                 IsRefreshing="{Binding IsRefreshing}"
+                 Command="{Binding LoadCommand}">
+
+            <CollectionView ItemsSource="{Binding Items}"
+                        SelectionMode="None">
+
+                <CollectionView.EmptyView>
+                    <Label Text="Sin datos"
+                       TextColor="{StaticResource TextSecondary}"
+                       Margin="12"/>
+                </CollectionView.EmptyView>
+
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Border Style="{StaticResource CardDark}">
+                            <!-- Info + botones visibles -->
+                            <Grid ColumnDefinitions="*,Auto,Auto"
+                              ColumnSpacing="8"
+                              Padding="8"
+                              VerticalOptions="Center">
+
+                                <!-- Texto -->
+                                <VerticalStackLayout Grid.Column="0" Spacing="2">
+                                    <Label Text="{Binding Name}"
+                                       Style="{StaticResource TitleLg}" />
+                                </VerticalStackLayout>
+
+                                <!-- Editar -->
+                                <Button Grid.Column="1"
+                                    Text="Editar"
+                                    Command="{Binding BindingContext.EditCommand, Source={x:Reference PageGenre}}"
+                                    CommandParameter="{Binding .}"
+                                    BackgroundColor="{StaticResource Primary}"
+                                    TextColor="White"
+                                    CornerRadius="10"
+                                    Padding="10,6"
+                                    HeightRequest="36" />
+
+                                <!-- Eliminar -->
+                                <Button Grid.Column="2"
+                                    Text="Eliminar"
+                                    Command="{Binding BindingContext.DeleteCommand, Source={x:Reference PageGenre}}"
+                                    CommandParameter="{Binding .}"
+                                    BackgroundColor="#D32F2F"
+                                    TextColor="White"
+                                    CornerRadius="10"
+                                    Padding="10,6"
+                                    HeightRequest="36" />
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </RefreshView>
+    </Grid>
+</ContentPage>

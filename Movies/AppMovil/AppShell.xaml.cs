@@ -1,4 +1,5 @@
 ﻿using AppMovil.Views.Actor;
+using AppMovil.Views.Genre;
 
 namespace AppMovil
 {
@@ -8,7 +9,9 @@ namespace AppMovil
         {
             InitializeComponent();
 
-            Routing.RegisterRoute("actor/form", typeof(AppMovil.Views.Actor.ActorFormPage));
+            Routing.RegisterRoute("actor/form", typeof(ActorFormPage));
+            Routing.RegisterRoute("genre/form", typeof(GenreFormPage));
+
 
         }
     }
