@@ -10,7 +10,7 @@
 
             <!-- Encabezado -->
             <Label 
-            Text="Información del actor"
+            Text="Información del genéro"
             FontAttributes="Bold"
             FontSize="22"
             TextColor="{StaticResource TextPrimary}" />
