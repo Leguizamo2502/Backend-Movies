@@ -1,8 +1,10 @@
+using System.Collections.Generic;
 using AppMovil.ViewModels.Implements.Actor;
+using Microsoft.Maui.Controls;
 
 namespace AppMovil.Views.Actor;
 
-public partial class ActorFormPage : ContentPage
+public partial class ActorFormPage : ContentPage, IQueryAttributable
 {
     public ActorFormPage(ActorFormViewModel vm)
     {
@@ -10,12 +12,11 @@ public partial class ActorFormPage : ContentPage
         BindingContext = vm;
     }
 
-    protected override async void OnAppearing()
+    public void ApplyQueryAttributes(IDictionary<string, object> query)
     {
-        base.OnAppearing();
-
-        // Si el ViewModel tiene un ID (navegación con parámetros), carga los datos
-        if (BindingContext is ActorFormViewModel vm && vm.Id > 0)
-            await vm.LoadAsync(vm.Id);
+        if (BindingContext is ActorFormViewModel vm)
+        {
+            vm.ApplyQueryAttributes(query);
+        }
     }
 }
