@@ -1,7 +1,8 @@
-﻿using AppMovil.Models.Implements.Actor;
+using AppMovil.Models.Implements.Actor;
 using AppMovil.Services.Abstractions.Generic;
 using AppMovil.Services.Abstractions.Implements;
 using AppMovil.ViewModels.Generic;
+using System.Collections.Generic;
 
 namespace AppMovil.ViewModels.Implements.Actor
 {
@@ -61,12 +62,19 @@ namespace AppMovil.ViewModels.Implements.Actor
 
         public void ApplyQueryAttributes(IDictionary<string, object> query)
         {
-            // Clave: "id" (minúsculas) porque navegas con ?id=...
             if (query.TryGetValue("id", out var raw) && raw is string s && int.TryParse(s, out var id) && id > 0)
             {
-                Id = id;                  // <- propiedad de BaseFormViewModel
-                _ = LoadAsync(id);        // <- método de BaseFormViewModel (ya lo tienes)
+                Id = id;
+                DeleteCommand.NotifyCanExecuteChanged();
+
+                _ = LoadAsync(id);
+                return;
             }
+
+            Id = 0;
+            Name = string.Empty;
+            BirthYear = null;
+            DeleteCommand.NotifyCanExecuteChanged();
         }
 
         // Validación antes de guardar
