@@ -1,4 +1,5 @@
 ﻿using AppMovil.Config;
+using System.Net.Http;
 using System.Net.Http.Json;
 
 namespace AppMovil.Services.Http
@@ -28,6 +29,9 @@ namespace AppMovil.Services.Http
             response.EnsureSuccessStatusCode();
             return await response.Content.ReadFromJsonAsync<TResponse>(cancellationToken: ct);
         }
+
+        public Task<HttpResponseMessage> PostRawAsync<TRequest>(string uri, TRequest data, CancellationToken ct = default)
+            => _http.PostAsJsonAsync(uri, data, ct);
 
         // PUT
         public async Task PutAsync<TRequest>(string uri, TRequest data, CancellationToken ct = default)

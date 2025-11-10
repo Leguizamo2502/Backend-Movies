@@ -4,6 +4,7 @@ using AppMovil.Services.Abstractions.Implements;
 using AppMovil.Services.Implementations;
 using AppMovil.Services.Implementations.Generic;
 using AppMovil.Services.Implementations.Implements;
+using AppMovil.ViewModels.Implements.Auth;
 using AppMovil.ViewModels.Implements.Actor;
 using AppMovil.ViewModels.Implements.Genre;
 using AppMovil.ViewModels.Implements.MovieActor;
@@ -11,6 +12,7 @@ using AppMovil.ViewModels.Implements.MovieGenre;
 using AppMovil.ViewModels.Implements.Movies;
 using AppMovil.ViewModels.Implements.Review;
 using AppMovil.ViewModels.Implements.Watchlist;
+using AppMovil.Views.Auth;
 using AppMovil.Views.Actor;
 using AppMovil.Views.Genre;
 using AppMovil.Views.MovieActor;
@@ -31,6 +33,7 @@ namespace AppMovil.Config
 
 
             // ----------------- ViewModels -------------------------------
+            services.AddScoped<LoginViewModel>();
             services.AddScoped<MovieListViewModel>();
             services.AddScoped<MovieFormViewModel>();
 
@@ -53,6 +56,7 @@ namespace AppMovil.Config
             services.AddScoped<ReviewFormViewModel>();
 
             // ----------------- Views / Pages ---------------------------
+            services.AddTransient<LoginPage>();
             services.AddTransient<MovieListPage>();
             services.AddTransient<MovieFormPage>(); 
 
@@ -86,6 +90,7 @@ namespace AppMovil.Config
             services.AddScoped<IWatchlistService, WatchlistService>();
             services.AddScoped<IReviewService, ReviewService>();
             services.AddScoped<IUserLookupService, UserLookupService>();
+            services.AddScoped<IAuthService, AuthService>();
 
             return services;
         }

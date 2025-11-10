@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AppMovil.Views.Auth.LoginPage"
+             Title="Iniciar sesión"
+             BackgroundColor="{StaticResource Bg}">
+    <ScrollView>
+        <VerticalStackLayout Spacing="24"
+                              Padding="32"
+                              VerticalOptions="Center">
+            <VerticalStackLayout Spacing="4">
+                <Label Text="Bienvenido de nuevo"
+                       Style="{StaticResource TitleLg}" />
+                <Label Text="Inicia sesión para gestionar el catálogo"
+                       Style="{StaticResource Body}" />
+            </VerticalStackLayout>
+
+            <Border Style="{StaticResource CardDark}">
+                <VerticalStackLayout Spacing="16">
+                    <Entry Text="{Binding Email}"
+                           Placeholder="Correo electrónico"
+                           Keyboard="Email"
+                           IsEnabled="{Binding IsNotBusy}" />
+                    <Entry Text="{Binding Password}"
+                           Placeholder="Contraseña"
+                           IsPassword="True"
+                           IsEnabled="{Binding IsNotBusy}" />
+
+                    <Label Text="{Binding ErrorMessage}"
+                           TextColor="IndianRed"
+                           FontSize="12"
+                           IsVisible="{Binding HasError}" />
+
+                    <Button Text="Ingresar"
+                            Style="{StaticResource PrimaryButton}"
+                            Command="{Binding LoginCommand}"
+                            IsEnabled="{Binding IsNotBusy}" />
+                </VerticalStackLayout>
+            </Border>
+
+            <ActivityIndicator IsRunning="{Binding IsBusy}"
+                               IsVisible="{Binding IsBusy}"
+                               Color="White"
+                               HorizontalOptions="Center" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
