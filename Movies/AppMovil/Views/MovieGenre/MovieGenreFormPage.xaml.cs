@@ -1,12 +1,12 @@
 using System.Collections.Generic;
-using AppMovil.ViewModels.Implements.Genre;
+using AppMovil.ViewModels.Implements.MovieGenre;
 using Microsoft.Maui.Controls;
 
-namespace AppMovil.Views.Genre;
+namespace AppMovil.Views.MovieGenre;
 
-public partial class GenreFormPage : ContentPage, IQueryAttributable
+public partial class MovieGenreFormPage : ContentPage, IQueryAttributable
 {
-    public GenreFormPage(GenreFormViewModel vm)
+    public MovieGenreFormPage(MovieGenreFormViewModel vm)
     {
         InitializeComponent();
         BindingContext = vm;
@@ -14,7 +14,7 @@ public partial class GenreFormPage : ContentPage, IQueryAttributable
 
     public void ApplyQueryAttributes(IDictionary<string, object> query)
     {
-        if (BindingContext is GenreFormViewModel vm)
+        if (BindingContext is MovieGenreFormViewModel vm)
         {
             vm.ApplyQueryAttributes(query);
         }

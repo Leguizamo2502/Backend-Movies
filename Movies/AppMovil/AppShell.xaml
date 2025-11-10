@@ -3,42 +3,21 @@
     x:Class="AppMovil.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:actor="clr-namespace:AppMovil.Views.Actor"
-    xmlns:genre="clr-namespace:AppMovil.Views.Genre"
-    xmlns:user="clr-namespace:AppMovil.Views.Users"
-    
-    FlyoutBehavior="Flyout">
-
-    <!-- ACTORES -->
-    <FlyoutItem
-        Title="Actores"
-        Icon="actors.png"
-        Route="actors">
-        <ShellContent
-            Title="Lista de actores"
-            Route="actor-list"
-            ContentTemplate="{DataTemplate actor:ActorListPage}" />
-    </FlyoutItem>
-
-    <!-- GÉNEROS -->
-    <FlyoutItem
-        Title="Géneros"
-        Icon="genres.png"
-        Route="genres">
-        <ShellContent
-            Title="Lista de géneros"
-            Route="genre-list"
-            ContentTemplate="{DataTemplate genre:GenreListPage}" />
-    </FlyoutItem>
+    xmlns:movies="clr-namespace:AppMovil.Views.Movies"
+    xmlns:actors="clr-namespace:AppMovil.Views.Actor"
+    xmlns:genres="clr-namespace:AppMovil.Views.Genre"
+    xmlns:movieActor="clr-namespace:AppMovil.Views.MovieActor"
+    xmlns:movieGenre="clr-namespace:AppMovil.Views.MovieGenre"
+    xmlns:watchlist="clr-namespace:AppMovil.Views.Watchlist"
+    xmlns:review="clr-namespace:AppMovil.Views.Review">
 
     <FlyoutItem
     Title="Usuarios"
     Icon="genres.png"
     Route="genres">
         <ShellContent
-        Title="Lista de Usuarios"
-        Route="user-list"
-        ContentTemplate="{DataTemplate user:UserListPage}" />
-    </FlyoutItem>
-
+            Title="Películas"
+            ContentTemplate="{DataTemplate views:GenreListPage}"
+            Route="movies" />
+    </TabBar>
 </Shell>

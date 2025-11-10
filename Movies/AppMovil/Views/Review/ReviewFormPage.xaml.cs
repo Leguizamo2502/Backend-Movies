@@ -1,12 +1,12 @@
 using System.Collections.Generic;
-using AppMovil.ViewModels.Implements.Genre;
+using AppMovil.ViewModels.Implements.Review;
 using Microsoft.Maui.Controls;
 
-namespace AppMovil.Views.Genre;
+namespace AppMovil.Views.Review;
 
-public partial class GenreFormPage : ContentPage, IQueryAttributable
+public partial class ReviewFormPage : ContentPage, IQueryAttributable
 {
-    public GenreFormPage(GenreFormViewModel vm)
+    public ReviewFormPage(ReviewFormViewModel vm)
     {
         InitializeComponent();
         BindingContext = vm;
@@ -14,7 +14,7 @@ public partial class GenreFormPage : ContentPage, IQueryAttributable
 
     public void ApplyQueryAttributes(IDictionary<string, object> query)
     {
-        if (BindingContext is GenreFormViewModel vm)
+        if (BindingContext is ReviewFormViewModel vm)
         {
             vm.ApplyQueryAttributes(query);
         }

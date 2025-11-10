@@ -1,6 +1,9 @@
-﻿using AppMovil.Views.Actor;
+using AppMovil.Views.Actor;
 using AppMovil.Views.Genre;
-using AppMovil.Views.Users;
+using AppMovil.Views.MovieActor;
+using AppMovil.Views.MovieGenre;
+using AppMovil.Views.Review;
+using AppMovil.Views.Watchlist;
 
 namespace AppMovil
 {
@@ -13,9 +16,6 @@ namespace AppMovil
             Routing.RegisterRoute("actor/form", typeof(ActorFormPage));
 
             Routing.RegisterRoute("genre/form", typeof(GenreFormPage));
-            
-            Routing.RegisterRoute("user/form", typeof(UserFormPage));
-
 
 
         }
