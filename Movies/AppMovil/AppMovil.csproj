@@ -81,12 +81,15 @@
 	  <MauiXaml Update="Views\Genre\GenreFormPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Views\Genre\GenreListPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Views\Movies\MovieFormPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
+          <MauiXaml Update="Views\Genre\GenreListPage.xaml">
+            <Generator>MSBuild:Compile</Generator>
+          </MauiXaml>
+          <MauiXaml Update="Views\Auth\LoginPage.xaml">
+            <Generator>MSBuild:Compile</Generator>
+          </MauiXaml>
+          <MauiXaml Update="Views\Movies\MovieFormPage.xaml">
+            <Generator>MSBuild:Compile</Generator>
+          </MauiXaml>
 	  <MauiXaml Update="Views\Movies\MovieListPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

@@ -1,16 +1,18 @@
-﻿<?xml version = "1.0" encoding = "UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8"?>
 <Application xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:AppMovil"
-             x:Class="AppMovil.App"
-             xmlns:converters="clr-namespace:AppMovil.Converters">
+             xmlns:converters="clr-namespace:AppMovil.Converters"
+             x:Class="AppMovil.App">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Resources/Styles/Colors.xaml" />
                 <ResourceDictionary Source="Resources/Styles/Styles.xaml" />
             </ResourceDictionary.MergedDictionaries>
+
             <converters:GreaterThanZeroConverter x:Key="GreaterThanZeroConverter" />
+
             <!-- Dark palette -->
             <Color x:Key="Primary">#7C3AED</Color>
             <!-- Morado navbar/botón -->
@@ -37,7 +39,7 @@
             </Style>
 
             <!-- Tarjeta (Border) oscura -->
-            <Style TargetType="Border" x:Key="CardDark">
+            <Style x:Key="CardDark" TargetType="Border">
                 <Setter Property="Background" Value="{StaticResource Surface}" />
                 <Setter Property="Stroke" Value="{StaticResource BorderColor}" />
                 <Setter Property="StrokeThickness" Value="1" />
@@ -46,31 +48,31 @@
                 <Setter Property="Margin" Value="10,8" />
                 <Setter Property="Shadow">
                     <Setter.Value>
-                        <Shadow Brush="#66000000" Opacity="0.4" Offset="0,2" Radius="10"/>
+                        <Shadow Brush="#66000000" Opacity="0.4" Offset="0,2" Radius="10" />
                     </Setter.Value>
                 </Setter>
             </Style>
 
             <!-- Tipografías -->
-            <Style TargetType="Label" x:Key="TitleLg">
+            <Style x:Key="TitleLg" TargetType="Label">
                 <Setter Property="FontSize" Value="16" />
                 <Setter Property="FontAttributes" Value="Bold" />
                 <Setter Property="TextColor" Value="{StaticResource TextPrimary}" />
             </Style>
 
-            <Style TargetType="Label" x:Key="Body">
+            <Style x:Key="Body" TargetType="Label">
                 <Setter Property="FontSize" Value="14" />
                 <Setter Property="TextColor" Value="{StaticResource TextSecondary}" />
                 <Setter Property="LineBreakMode" Value="WordWrap" />
             </Style>
 
-            <Style TargetType="Label" x:Key="MetaSm">
+            <Style x:Key="MetaSm" TargetType="Label">
                 <Setter Property="FontSize" Value="12" />
                 <Setter Property="TextColor" Value="{StaticResource Muted}" />
             </Style>
 
             <!-- Botón primario morado -->
-            <Style TargetType="Button" x:Key="PrimaryButton">
+            <Style x:Key="PrimaryButton" TargetType="Button">
                 <Setter Property="BackgroundColor" Value="{StaticResource Primary}" />
                 <Setter Property="TextColor" Value="White" />
                 <Setter Property="CornerRadius" Value="12" />

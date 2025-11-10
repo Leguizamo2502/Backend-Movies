@@ -1,7 +1,9 @@
 ﻿
 using AppMovil.Config;
 using AppMovil.Services.Http;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using System.Net;
 
 namespace AppMovil
 {
@@ -25,8 +27,15 @@ namespace AppMovil
             };
             builder.Services.AddSingleton(apiOptions);
 
-            // 2) HttpClient central
-            builder.Services.AddHttpClient<ApiClient>();
+            // 2) HttpClient central con soporte de cookies
+            builder.Services.AddSingleton(new CookieContainer());
+            builder.Services
+                .AddHttpClient<ApiClient>()
+                .ConfigurePrimaryHttpMessageHandler(sp => new HttpClientHandler
+                {
+                    CookieContainer = sp.GetRequiredService<CookieContainer>(),
+                    UseCookies = true
+                });
 
 
             //services
