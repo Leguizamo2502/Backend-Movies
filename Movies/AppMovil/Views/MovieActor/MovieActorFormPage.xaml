@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AppMovil.Views.MovieActor.MovieActorFormPage"
+             BackgroundColor="{StaticResource Bg}"
+             Title="Asignar actor">
+    <ScrollView>
+        <VerticalStackLayout Padding="24" Spacing="20">
+            <Label Text="Asignar actor a película"
+                   FontAttributes="Bold"
+                   FontSize="22"
+                   TextColor="{StaticResource TextPrimary}" />
+
+            <VerticalStackLayout>
+                <Label Text="Película"
+                       FontAttributes="Bold"
+                       TextColor="{StaticResource TextSecondary}" />
+                <Picker ItemsSource="{Binding Movies}"
+                        ItemDisplayBinding="{Binding Title}"
+                        SelectedItem="{Binding SelectedMovie}"
+                        Title="Selecciona una película" />
+            </VerticalStackLayout>
+
+            <VerticalStackLayout>
+                <Label Text="Actor"
+                       FontAttributes="Bold"
+                       TextColor="{StaticResource TextSecondary}" />
+                <Picker ItemsSource="{Binding Actors}"
+                        ItemDisplayBinding="{Binding Name}"
+                        SelectedItem="{Binding SelectedActor}"
+                        Title="Selecciona un actor" />
+            </VerticalStackLayout>
+
+            <VerticalStackLayout>
+                <Label Text="Personaje"
+                       FontAttributes="Bold"
+                       TextColor="{StaticResource TextSecondary}" />
+                <Entry Text="{Binding RoleName}"
+                       Placeholder="Ej: Protagonista"
+                       TextColor="{StaticResource TextPrimary}" />
+            </VerticalStackLayout>
+
+            <ActivityIndicator IsRunning="{Binding IsBusy}"
+                               IsVisible="{Binding IsBusy}"
+                               Color="{StaticResource Primary}" />
+
+            <HorizontalStackLayout Spacing="12">
+                <Button Text="Guardar"
+                        Command="{Binding SaveCommand}"
+                        BackgroundColor="{StaticResource Primary}"
+                        TextColor="White"
+                        FontAttributes="Bold"
+                        CornerRadius="8"
+                        HorizontalOptions="FillAndExpand" />
+
+                <Button Text="Eliminar"
+                        Command="{Binding DeleteCommand}"
+                        BackgroundColor="#D32F2F"
+                        TextColor="White"
+                        CornerRadius="8"
+                        HorizontalOptions="FillAndExpand"
+                        IsVisible="{Binding Id, Converter={StaticResource GreaterThanZeroConverter}}" />
+            </HorizontalStackLayout>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

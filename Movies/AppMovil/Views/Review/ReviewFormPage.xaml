@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AppMovil.Views.Review.ReviewFormPage"
+             BackgroundColor="{StaticResource Bg}"
+             Title="Reseña">
+    <ScrollView>
+        <VerticalStackLayout Padding="24" Spacing="20">
+            <Label Text="Registrar reseña"
+                   FontAttributes="Bold"
+                   FontSize="22"
+                   TextColor="{StaticResource TextPrimary}" />
+
+            <VerticalStackLayout>
+                <Label Text="Película"
+                       FontAttributes="Bold"
+                       TextColor="{StaticResource TextSecondary}" />
+                <Picker ItemsSource="{Binding Movies}"
+                        ItemDisplayBinding="{Binding Title}"
+                        SelectedItem="{Binding SelectedMovie}"
+                        Title="Selecciona una película" />
+            </VerticalStackLayout>
+
+            <VerticalStackLayout>
+                <Label Text="Usuario"
+                       FontAttributes="Bold"
+                       TextColor="{StaticResource TextSecondary}" />
+                <Picker ItemsSource="{Binding Users}"
+                        ItemDisplayBinding="{Binding Name}"
+                        SelectedItem="{Binding SelectedUser}"
+                        Title="Selecciona un usuario" />
+            </VerticalStackLayout>
+
+            <VerticalStackLayout>
+                <Label Text="Calificación"
+                       FontAttributes="Bold"
+                       TextColor="{StaticResource TextSecondary}" />
+                <HorizontalStackLayout Spacing="12" VerticalOptions="Center">
+                    <Label Text="{Binding Rating}" FontSize="18" TextColor="{StaticResource TextPrimary}" />
+                    <Stepper Minimum="1"
+                             Maximum="5"
+                             Increment="1"
+                             Value="{Binding Rating}" />
+                </HorizontalStackLayout>
+            </VerticalStackLayout>
+
+            <VerticalStackLayout>
+                <Label Text="Comentario"
+                       FontAttributes="Bold"
+                       TextColor="{StaticResource TextSecondary}" />
+                <Editor Text="{Binding Comment}"
+                        Placeholder="Escribe tus comentarios"
+                        AutoSize="TextChanges"
+                        TextColor="{StaticResource TextPrimary}" />
+            </VerticalStackLayout>
+
+            <ActivityIndicator IsRunning="{Binding IsBusy}"
+                               IsVisible="{Binding IsBusy}"
+                               Color="{StaticResource Primary}" />
+
+            <HorizontalStackLayout Spacing="12">
+                <Button Text="Guardar"
+                        Command="{Binding SaveCommand}"
+                        BackgroundColor="{StaticResource Primary}"
+                        TextColor="White"
+                        FontAttributes="Bold"
+                        CornerRadius="8"
+                        HorizontalOptions="FillAndExpand" />
+
+                <Button Text="Eliminar"
+                        Command="{Binding DeleteCommand}"
+                        BackgroundColor="#D32F2F"
+                        TextColor="White"
+                        CornerRadius="8"
+                        HorizontalOptions="FillAndExpand"
+                        IsVisible="{Binding Id, Converter={StaticResource GreaterThanZeroConverter}}" />
+            </HorizontalStackLayout>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
