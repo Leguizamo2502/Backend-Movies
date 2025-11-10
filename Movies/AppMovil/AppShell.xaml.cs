@@ -8,7 +8,7 @@ namespace AppMovil
         {
             InitializeComponent();
 
-            Routing.RegisterRoute("actor/form", typeof(ActorFormPage));
+            Routing.RegisterRoute("actor/form", typeof(AppMovil.Views.Actor.ActorFormPage));
 
         }
     }

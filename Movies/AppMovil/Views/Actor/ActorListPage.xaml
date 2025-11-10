@@ -34,8 +34,10 @@
         <RefreshView Grid.Row="2"
                      IsRefreshing="{Binding IsRefreshing}"
                      Command="{Binding LoadCommand}">
+
             <CollectionView ItemsSource="{Binding Items}"
                             SelectionMode="None">
+
                 <CollectionView.EmptyView>
                     <Label Text="Sin datos"
                            TextColor="{StaticResource TextSecondary}"
@@ -44,38 +46,44 @@
 
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <!-- Acciones por ítem -->
-                        <SwipeView>
-                            <SwipeView.RightItems>
-                                <SwipeItems Mode="Execute">
-                                    <SwipeItem Text="Editar"
-                                               BackgroundColor="{StaticResource Primary}"
-                                               Command="{Binding BindingContext.EditCommand, Source={x:Reference PageRoot}}"
-                                               CommandParameter="{Binding .}" />
-                                    <SwipeItem Text="Eliminar"
-                                               BackgroundColor="#D32F2F"
-                                               Command="{Binding BindingContext.DeleteCommand, Source={x:Reference PageRoot}}"
-                                               CommandParameter="{Binding .}" />
-                                </SwipeItems>
-                            </SwipeView.RightItems>
+                        <Border Style="{StaticResource CardDark}">
+                            <!-- Info + botones visibles -->
+                            <Grid ColumnDefinitions="*,Auto,Auto"
+                                  ColumnSpacing="8"
+                                  Padding="8"
+                                  VerticalOptions="Center">
 
-                            <!-- Card -->
-                            <Border Style="{StaticResource CardDark}">
-                                <VerticalStackLayout Spacing="6">
+                                <!-- Texto -->
+                                <VerticalStackLayout Grid.Column="0" Spacing="2">
                                     <Label Text="{Binding Name}"
                                            Style="{StaticResource TitleLg}" />
                                     <Label Text="{Binding BirthYear}"
                                            Style="{StaticResource MetaSm}" />
-
-                                    <!-- Tap para editar -->
-                                    <VerticalStackLayout.GestureRecognizers>
-                                        <TapGestureRecognizer
-                                            Command="{Binding BindingContext.EditCommand, Source={x:Reference PageRoot}}"
-                                            CommandParameter="{Binding .}" />
-                                    </VerticalStackLayout.GestureRecognizers>
                                 </VerticalStackLayout>
-                            </Border>
-                        </SwipeView>
+
+                                <!-- Editar -->
+                                <Button Grid.Column="1"
+                                        Text="Editar"
+                                        Command="{Binding BindingContext.EditCommand, Source={x:Reference PageRoot}}"
+                                        CommandParameter="{Binding .}"
+                                        BackgroundColor="{StaticResource Primary}"
+                                        TextColor="White"
+                                        CornerRadius="10"
+                                        Padding="10,6"
+                                        HeightRequest="36" />
+
+                                <!-- Eliminar -->
+                                <Button Grid.Column="2"
+                                        Text="Eliminar"
+                                        Command="{Binding BindingContext.DeleteCommand, Source={x:Reference PageRoot}}"
+                                        CommandParameter="{Binding .}"
+                                        BackgroundColor="#D32F2F"
+                                        TextColor="White"
+                                        CornerRadius="10"
+                                        Padding="10,6"
+                                        HeightRequest="36" />
+                            </Grid>
+                        </Border>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>

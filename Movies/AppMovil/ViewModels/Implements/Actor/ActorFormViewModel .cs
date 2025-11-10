@@ -46,6 +46,7 @@ namespace AppMovil.ViewModels.Implements.Actor
 
         protected override ActorUpdateDto BuildUpdateDto() => new()
         {
+            Id = Id,
             Name = Name,
             BirthYear = BirthYear
         };
@@ -56,6 +57,16 @@ namespace AppMovil.ViewModels.Implements.Actor
             Id = dto.Id;
             Name = dto.Name;
             BirthYear = dto.BirthYear;
+        }
+
+        public void ApplyQueryAttributes(IDictionary<string, object> query)
+        {
+            // Clave: "id" (minúsculas) porque navegas con ?id=...
+            if (query.TryGetValue("id", out var raw) && raw is string s && int.TryParse(s, out var id) && id > 0)
+            {
+                Id = id;                  // <- propiedad de BaseFormViewModel
+                _ = LoadAsync(id);        // <- método de BaseFormViewModel (ya lo tienes)
+            }
         }
 
         // Validación antes de guardar
