@@ -1,5 +1,6 @@
 ﻿using AppMovil.Models.Implements.Actor;
 using AppMovil.Services.Abstractions.Generic;
+using AppMovil.Services.Abstractions.Implements;
 using AppMovil.ViewModels.Generic;
 
 namespace AppMovil.ViewModels.Implements.Actor
@@ -31,7 +32,7 @@ namespace AppMovil.ViewModels.Implements.Actor
         }
 
         // Constructor: recibe el servicio genérico ya inyectado
-        public ActorFormViewModel(IGenericService<ActorSelectDto, ActorCreateDto, ActorUpdateDto> service)
+        public ActorFormViewModel(IActorService service)
             : base(service)
         {
         }

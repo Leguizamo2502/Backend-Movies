@@ -1,23 +1,23 @@
 using AppMovil.ViewModels.Implements.Actor;
 
-namespace AppMovil.Views.Actor;
-
-public partial class ActorListPage : ContentPage
+namespace AppMovil.Views.Actor
 {
-    private readonly ActorListViewModel _vm;
-
-    public ActorListPage(ActorListViewModel vm)
+    public partial class ActorListPage : ContentPage
     {
-        InitializeComponent();
-        BindingContext = _vm = vm;
-    }
+        private readonly ActorListViewModel _vm;
 
-    protected override async void OnAppearing()
-    {
-        base.OnAppearing();
+        public ActorListPage(ActorListViewModel vm)
+        {
+            InitializeComponent();
+            BindingContext = _vm = vm;
+        }
 
-        // Solo carga si la lista está vacía (evita doble carga)
-        if (_vm.Items.Count == 0)
-            await _vm.LoadCommand.ExecuteAsync(null);
+        protected override async void OnAppearing()
+        {
+            base.OnAppearing();
+            // Si prefieres refrescar siempre, elimina el if
+            if (_vm.Items.Count == 0)
+                await _vm.LoadCommand.ExecuteAsync(null);
+        }
     }
 }

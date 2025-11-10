@@ -1,6 +1,8 @@
-﻿using AppMovil.Services.Abstractions;
+﻿using AppMovil.Models.Implements.Actor;
+using AppMovil.Services.Abstractions;
 using AppMovil.Services.Abstractions.Generic;
 using AppMovil.Services.Abstractions.Implements;
+using AppMovil.Services.Http;
 using AppMovil.Services.Implementations;
 using AppMovil.Services.Implementations.Generic;
 using AppMovil.Services.Implementations.Implements;
@@ -17,6 +19,7 @@ namespace AppMovil.Config
         {
             //Generic Service
             services.AddScoped(typeof(IGenericService<,,>), typeof(GenericService<,,>));
+
 
 
             // ----------------- ViewModels -------------------------------

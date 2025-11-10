@@ -1,9 +1,20 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="AppMovil.Views.Actor.ActorListPage"
-             BackgroundColor="{StaticResource Bg}"
-             Title="Actores">
+<?xml version="1.0" encoding="utf-8"?>
+<ContentPage
+    x:Class="AppMovil.Views.Actor.ActorListPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    BackgroundColor="{StaticResource Bg}"
+    Title="Actores"
+    x:Name="PageRoot">
+
+    <!-- Botón para crear -->
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Agregar"
+                     Priority="0"
+                     Order="Primary"
+                     Command="{Binding CreateCommand}" />
+    </ContentPage.ToolbarItems>
+
     <Grid RowDefinitions="Auto,Auto,*" Padding="16">
 
         <!-- Título -->
@@ -33,17 +44,38 @@
 
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <Border Style="{StaticResource CardDark}">
-                            <VerticalStackLayout Spacing="6">
-                                <!-- Nombre del actor -->
-                                <Label Text="{Binding Name}"
-                                       Style="{StaticResource TitleLg}" />
+                        <!-- Acciones por ítem -->
+                        <SwipeView>
+                            <SwipeView.RightItems>
+                                <SwipeItems Mode="Execute">
+                                    <SwipeItem Text="Editar"
+                                               BackgroundColor="{StaticResource Primary}"
+                                               Command="{Binding BindingContext.EditCommand, Source={x:Reference PageRoot}}"
+                                               CommandParameter="{Binding .}" />
+                                    <SwipeItem Text="Eliminar"
+                                               BackgroundColor="#D32F2F"
+                                               Command="{Binding BindingContext.DeleteCommand, Source={x:Reference PageRoot}}"
+                                               CommandParameter="{Binding .}" />
+                                </SwipeItems>
+                            </SwipeView.RightItems>
 
-                                <!-- Año de nacimiento (si viene nulo no muestra nada) -->
-                                <Label Text="{Binding BirthYear}"
-                                       Style="{StaticResource MetaSm}" />
-                            </VerticalStackLayout>
-                        </Border>
+                            <!-- Card -->
+                            <Border Style="{StaticResource CardDark}">
+                                <VerticalStackLayout Spacing="6">
+                                    <Label Text="{Binding Name}"
+                                           Style="{StaticResource TitleLg}" />
+                                    <Label Text="{Binding BirthYear}"
+                                           Style="{StaticResource MetaSm}" />
+
+                                    <!-- Tap para editar -->
+                                    <VerticalStackLayout.GestureRecognizers>
+                                        <TapGestureRecognizer
+                                            Command="{Binding BindingContext.EditCommand, Source={x:Reference PageRoot}}"
+                                            CommandParameter="{Binding .}" />
+                                    </VerticalStackLayout.GestureRecognizers>
+                                </VerticalStackLayout>
+                            </Border>
+                        </SwipeView>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>

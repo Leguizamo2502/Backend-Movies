@@ -5,9 +5,9 @@ using System.Collections.ObjectModel;
 
 namespace AppMovil.ViewModels.Generic
 {
-    public abstract class BaseListViewModel<TSelect> : ObservableObject
+    public abstract class BaseListViewModel<TSelect,TCreate,TUpdate> : ObservableObject
     {
-        protected readonly IGenericService<TSelect, object, object> _service;
+        protected readonly IGenericService<TSelect, TCreate, TUpdate> _service;
 
         private bool _isBusy;
         public bool IsBusy
@@ -34,7 +34,7 @@ namespace AppMovil.ViewModels.Generic
 
         public IAsyncRelayCommand LoadCommand { get; }
 
-        protected BaseListViewModel(IGenericService<TSelect, object, object> service)
+        protected BaseListViewModel(IGenericService<TSelect, TCreate, TUpdate> service)
         {
             _service = service;
             LoadCommand = new AsyncRelayCommand(LoadAsync);
