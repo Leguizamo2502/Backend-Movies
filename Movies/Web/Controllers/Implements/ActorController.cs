@@ -3,14 +3,13 @@ using Entity.Domain.Enums;
 using Entity.DTOs.Talent.Actor.Create;
 using Entity.DTOs.Talent.Actor.Select;
 using Entity.DTOs.Talent.Actor.Update;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Web.Controllers.Base;
 
 namespace Web.Controllers.Implements
 {
     [Route("api/v1/[controller]")]
-    [Authorize]
+    //[Authorize]
     [ApiController]
     [Produces("application/json")]
     public class ActorController : BaseController<ActorSelectDto, ActorCreateDto, ActorUpdateDto, IActorService>

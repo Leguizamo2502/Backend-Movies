@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AppMovil.Views.Actor.ActorListPage"
+             BackgroundColor="{StaticResource Bg}"
+             Title="Actores">
+    <Grid RowDefinitions="Auto,Auto,*" Padding="16">
+
+        <!-- Título -->
+        <Label Grid.Row="0"
+               Text="{Binding Title}"
+               FontAttributes="Bold"
+               FontSize="22"
+               TextColor="{StaticResource TextPrimary}" />
+
+        <!-- Indicador primera carga -->
+        <ActivityIndicator Grid.Row="1"
+                           IsVisible="{Binding IsBusy}"
+                           IsRunning="{Binding IsBusy}"
+                           Color="{StaticResource Primary}" />
+
+        <!-- Pull-to-refresh -->
+        <RefreshView Grid.Row="2"
+                     IsRefreshing="{Binding IsRefreshing}"
+                     Command="{Binding LoadCommand}">
+            <CollectionView ItemsSource="{Binding Items}"
+                            SelectionMode="None">
+                <CollectionView.EmptyView>
+                    <Label Text="Sin datos"
+                           TextColor="{StaticResource TextSecondary}"
+                           Margin="12"/>
+                </CollectionView.EmptyView>
+
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Border Style="{StaticResource CardDark}">
+                            <VerticalStackLayout Spacing="6">
+                                <!-- Nombre del actor -->
+                                <Label Text="{Binding Name}"
+                                       Style="{StaticResource TitleLg}" />
+
+                                <!-- Año de nacimiento (si viene nulo no muestra nada) -->
+                                <Label Text="{Binding BirthYear}"
+                                       Style="{StaticResource MetaSm}" />
+                            </VerticalStackLayout>
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </RefreshView>
+    </Grid>
+</ContentPage>

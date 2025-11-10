@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AppMovil.Views.Actor.ActorFormPage"
+             BackgroundColor="{StaticResource Bg}"
+             Title="Actor">
+    <ScrollView>
+        <VerticalStackLayout Padding="24" Spacing="20">
+
+            <!-- Encabezado -->
+            <Label 
+                Text="Información del actor"
+                FontAttributes="Bold"
+                FontSize="22"
+                TextColor="{StaticResource TextPrimary}" />
+
+            <!-- Campo: Nombre -->
+            <VerticalStackLayout>
+                <Label Text="Nombre" 
+                       FontAttributes="Bold" 
+                       TextColor="{StaticResource TextSecondary}" />
+                <Entry Text="{Binding Name}" 
+                       Placeholder="Ej: Tom Hanks"
+                       TextColor="{StaticResource TextPrimary}" />
+            </VerticalStackLayout>
+
+            <!-- Campo: Año de nacimiento -->
+            <VerticalStackLayout>
+                <Label Text="Año de nacimiento"
+                       FontAttributes="Bold"
+                       TextColor="{StaticResource TextSecondary}" />
+                <Entry Text="{Binding BirthYear}"
+                       Placeholder="Ej: 1956"
+                       Keyboard="Numeric"
+                       TextColor="{StaticResource TextPrimary}" />
+            </VerticalStackLayout>
+
+            <!-- Indicador de carga -->
+            <ActivityIndicator 
+                IsRunning="{Binding IsBusy}"
+                IsVisible="{Binding IsBusy}"
+                Color="{StaticResource Primary}" />
+
+            <!-- Botones -->
+            <HorizontalStackLayout Spacing="12">
+                <Button 
+                    Text="Guardar"
+                    Command="{Binding SaveCommand}"
+                    BackgroundColor="{StaticResource Primary}"
+                    TextColor="White"
+                    FontAttributes="Bold"
+                    CornerRadius="8"
+                    HorizontalOptions="FillAndExpand" />
+
+                <Button 
+                    Text="Eliminar"
+                    Command="{Binding DeleteCommand}"
+                    BackgroundColor="#D32F2F"
+                    TextColor="White"
+                    CornerRadius="8"
+                    HorizontalOptions="FillAndExpand"
+                    IsVisible="{Binding Id, Converter={StaticResource GreaterThanZeroConverter}}" />
+            </HorizontalStackLayout>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

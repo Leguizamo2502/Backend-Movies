@@ -1,0 +1,79 @@
+﻿<?xml version = "1.0" encoding = "UTF-8" ?>
+<Application xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:AppMovil"
+             x:Class="AppMovil.App">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Resources/Styles/Colors.xaml" />
+                <ResourceDictionary Source="Resources/Styles/Styles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <!-- Dark palette -->
+            <Color x:Key="Primary">#7C3AED</Color>
+            <!-- Morado navbar/botón -->
+            <Color x:Key="PrimaryDim">#6D28D9</Color>
+            <Color x:Key="Bg">#111827</Color>
+            <!-- Fondo principal -->
+            <Color x:Key="Surface">#1F2937</Color>
+            <!-- Fondo de tarjeta -->
+            <Color x:Key="SurfaceAlt">#111827</Color>
+            <Color x:Key="BorderColor">#374151</Color>
+            <!-- Borde sutil -->
+            <Color x:Key="TextPrimary">#F9FAFB</Color>
+            <!-- Texto principal -->
+            <Color x:Key="TextSecondary">#D1D5DB</Color>
+            <!-- Texto secundario -->
+            <Color x:Key="Muted">#9CA3AF</Color>
+            <!-- Meta/subtítulo -->
+
+            <!-- Shell (navbar morado) -->
+            <Style TargetType="Shell">
+                <Setter Property="ForegroundColor" Value="{StaticResource TextPrimary}" />
+                <Setter Property="TitleColor" Value="{StaticResource TextPrimary}" />
+                <Setter Property="BackgroundColor" Value="{StaticResource Primary}" />
+            </Style>
+
+            <!-- Tarjeta (Border) oscura -->
+            <Style TargetType="Border" x:Key="CardDark">
+                <Setter Property="Background" Value="{StaticResource Surface}" />
+                <Setter Property="Stroke" Value="{StaticResource BorderColor}" />
+                <Setter Property="StrokeThickness" Value="1" />
+                <Setter Property="StrokeShape" Value="RoundRectangle 14" />
+                <Setter Property="Padding" Value="14" />
+                <Setter Property="Margin" Value="10,8" />
+                <Setter Property="Shadow">
+                    <Setter.Value>
+                        <Shadow Brush="#66000000" Opacity="0.4" Offset="0,2" Radius="10"/>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+            <!-- Tipografías -->
+            <Style TargetType="Label" x:Key="TitleLg">
+                <Setter Property="FontSize" Value="16" />
+                <Setter Property="FontAttributes" Value="Bold" />
+                <Setter Property="TextColor" Value="{StaticResource TextPrimary}" />
+            </Style>
+
+            <Style TargetType="Label" x:Key="Body">
+                <Setter Property="FontSize" Value="14" />
+                <Setter Property="TextColor" Value="{StaticResource TextSecondary}" />
+                <Setter Property="LineBreakMode" Value="WordWrap" />
+            </Style>
+
+            <Style TargetType="Label" x:Key="MetaSm">
+                <Setter Property="FontSize" Value="12" />
+                <Setter Property="TextColor" Value="{StaticResource Muted}" />
+            </Style>
+
+            <!-- Botón primario morado -->
+            <Style TargetType="Button" x:Key="PrimaryButton">
+                <Setter Property="BackgroundColor" Value="{StaticResource Primary}" />
+                <Setter Property="TextColor" Value="White" />
+                <Setter Property="CornerRadius" Value="12" />
+                <Setter Property="Padding" Value="14,12" />
+            </Style>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

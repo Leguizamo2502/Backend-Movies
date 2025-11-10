@@ -47,7 +47,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-MigrationManager.MigrateAllDatabases(app.Services, builder.Configuration);
+//MigrationManager.MigrateAllDatabases(app.Services, builder.Configuration);
 
 app.UseHttpsRedirection();
 
