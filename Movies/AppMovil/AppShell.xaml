@@ -3,12 +3,42 @@
     x:Class="AppMovil.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:views="clr-namespace:AppMovil.Views.Genre">
+    xmlns:movies="clr-namespace:AppMovil.Views.Movies"
+    xmlns:actors="clr-namespace:AppMovil.Views.Actor"
+    xmlns:genres="clr-namespace:AppMovil.Views.Genre"
+    xmlns:movieActor="clr-namespace:AppMovil.Views.MovieActor"
+    xmlns:movieGenre="clr-namespace:AppMovil.Views.MovieGenre"
+    xmlns:watchlist="clr-namespace:AppMovil.Views.Watchlist"
+    xmlns:review="clr-namespace:AppMovil.Views.Review">
 
     <TabBar>
         <ShellContent
             Title="Películas"
-            ContentTemplate="{DataTemplate views:GenreListPage}"
+            ContentTemplate="{DataTemplate movies:MovieListPage}"
             Route="movies" />
+        <ShellContent
+            Title="Actores"
+            ContentTemplate="{DataTemplate actors:ActorListPage}"
+            Route="actors" />
+        <ShellContent
+            Title="Géneros"
+            ContentTemplate="{DataTemplate genres:GenreListPage}"
+            Route="genres" />
+        <ShellContent
+            Title="Reparto"
+            ContentTemplate="{DataTemplate movieActor:MovieActorListPage}"
+            Route="movieactors" />
+        <ShellContent
+            Title="Películas por género"
+            ContentTemplate="{DataTemplate movieGenre:MovieGenreListPage}"
+            Route="moviegenres" />
+        <ShellContent
+            Title="Watchlists"
+            ContentTemplate="{DataTemplate watchlist:WatchlistListPage}"
+            Route="watchlists" />
+        <ShellContent
+            Title="Reseñas"
+            ContentTemplate="{DataTemplate review:ReviewListPage}"
+            Route="reviews" />
     </TabBar>
 </Shell>
