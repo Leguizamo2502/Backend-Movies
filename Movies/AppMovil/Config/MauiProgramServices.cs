@@ -8,10 +8,12 @@ using AppMovil.Services.Implementations.Generic;
 using AppMovil.Services.Implementations.Implements;
 using AppMovil.ViewModels.Implements.Actor;
 using AppMovil.ViewModels.Implements.Genre;
+using AppMovil.ViewModels.Implements.Users;
 using AppMovil.ViewModels.Movies;
 using AppMovil.Views.Actor;
 using AppMovil.Views.Genre;
 using AppMovil.Views.Movies;
+using AppMovil.Views.Users;
 
 namespace AppMovil.Config
 {
@@ -33,6 +35,9 @@ namespace AppMovil.Config
             services.AddScoped<GenreListViewModel>();
             services.AddScoped<GenreFormViewModel>();
 
+            services.AddScoped<UserListViewModel>();
+            services.AddScoped<UserFormViewModel>();
+
             // ----------------- Views / Pages ---------------------------
             services.AddTransient<MovieListPage>();
 
@@ -42,6 +47,9 @@ namespace AppMovil.Config
             services.AddTransient<GenreListPage>();
             services.AddTransient<GenreFormPage>();
 
+            services.AddTransient<UserListPage>();
+            services.AddTransient<UserFormPage>();
+
 
             //services
             services.AddScoped<IMovieService, MovieService>();
@@ -49,6 +57,8 @@ namespace AppMovil.Config
             services.AddScoped<IActorService, ActorService>();
 
             services.AddScoped<IGenreService, GenreService>();
+
+            services.AddScoped<IUserService, UserServices>();
 
             return services;
         }

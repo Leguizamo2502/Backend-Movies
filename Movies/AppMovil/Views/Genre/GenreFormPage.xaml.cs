@@ -2,7 +2,7 @@ using AppMovil.ViewModels.Implements.Genre;
 
 namespace AppMovil.Views.Genre;
 
-public partial class GenreFormPage : ContentPage
+public partial class GenreFormPage : ContentPage, IQueryAttributable
 {
 	
 	public GenreFormPage(GenreFormViewModel vm)

@@ -1,13 +1,13 @@
-﻿using AppMovil.Models.Implements.Genre;
+﻿using AppMovil.Models.Implements.Users;
 using AppMovil.Services.Abstractions.Implements;
 using AppMovil.Services.Http;
 using AppMovil.Services.Implementations.Generic;
 
 namespace AppMovil.Services.Implementations.Implements
 {
-    public class GenreService : GenericService<GenreSelectDto, GenreCreateDto, GenreUpdateDto>, IGenreService
+    public class UserServices : GenericService<UserSelectDto, UserCreateDto, UserUpdateDto>, IUserService
     {
-        public GenreService(ApiClient api) : base(api, "Genre")
+        public UserServices(ApiClient api) : base(api, "User")
         {
         }
     }
